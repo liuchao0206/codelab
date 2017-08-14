@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="RoundPercentBar">
+        <attr name="rpbBaseColor" format="color"/>
+        <attr name="rpbPercentBarColor" format="color"/>
+        <attr name="rpbBarWidth" format="dimension"/>
+        <attr name="rpbDrawPercentVal" format="boolean"/>
+        <attr name="rpbTextColor" format="color"/>
+        <attr name="rpbPercentTextColor" format="color"/>
+        <attr name="rpbTextSize" format="dimension"/>
+        <attr name="rpbPercentTextSize" format="dimension"/>
+        <attr name="rpbHintText" format="string|reference"/>
+        <attr name="rpbHintTextColor" format="color"/>
+        <attr name="rpbHintTextSize" format="dimension"/>
+    </declare-styleable>
+
+</resources>
