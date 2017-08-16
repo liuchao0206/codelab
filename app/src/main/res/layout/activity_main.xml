@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context="com.coderpage.codelab.MainActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -18,41 +18,15 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
+            app:titleTextColor="@color/colorAction"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
     </android.support.design.widget.AppBarLayout>
 
-    <com.coderpage.codelab.widget.RoundPercentBar
-        android:id="@+id/rpb"
-        app:rpbBarWidth="3dp"
-        app:rpbBaseColor="@color/colorPrimary"
-        app:rpbPercentBarColor="@color/colorAccent"
-        app:rpbTextSize="14sp"
-        app:rpbTextColor="?android:textColorPrimary"
-        app:rpbPercentTextSize="12sp"
-        app:rpbPercentTextColor="?android:textColorHint"
-        app:rpbHintText="暂无数据"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="100dp"
-        android:layout_width="100dp"
-        android:layout_height="100dp"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-    <Button
-        android:layout_width="368dp"
-        android:layout_height="0dp"
-        android:onClick="request"
-        android:text="requst"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="0dp" />
-
-    <TextView
-        android:id="@+id/tvText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

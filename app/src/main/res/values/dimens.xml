@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="space_micro">2dp</dimen>
+    <dimen name="space_normal">4dp</dimen>
+    <dimen name="space_large">8dp</dimen>
+
+    <dimen name="margin_micro">10dp</dimen>
+    <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+    
+    <dimen name="app_text_micro">11sp</dimen>
+    <dimen name="app_text_medium">14sp</dimen>
+    <dimen name="app_text_normal">16sp</dimen>
+    <dimen name="app_text_large">24sp</dimen>
+
+    <dimen name="card_recycler_item_elevation">8dp</dimen>
+    <dimen name="card_recycler_item_corner_radius">4dp</dimen>
+</resources>

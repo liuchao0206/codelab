@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.coderpage.codelab.percentlayout.PercentLayoutActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_percentlayout"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="PercentLayout"
+            app:titleTextColor="@color/colorAction"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.percent.PercentFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="left|top"
+            android:background="#dbcc7f"
+            app:layout_heightPercent="25%"
+            app:layout_widthPercent="50%"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="right|top"
+            android:background="#878981"
+            app:layout_heightPercent="75%"
+            app:layout_widthPercent="50%"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="left|bottom"
+            android:background="#8f4415"
+            app:layout_heightPercent="75%"
+            app:layout_widthPercent="50%"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="right|bottom"
+            android:background="#dbcc7f"
+            app:layout_heightPercent="25%"
+            app:layout_widthPercent="50%"/>
+
+
+    </android.support.percent.PercentFrameLayout>
+
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/v1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#2d6296"
+            app:layout_heightPercent="25%"
+            app:layout_widthPercent="33%"/>
+
+        <View
+            android:id="@+id/v2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_toRightOf="@id/v1"
+            android:background="#937152"
+            app:layout_heightPercent="25%"
+            app:layout_widthPercent="34%"/>
+
+        <View
+            android:id="@+id/v3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_toRightOf="@id/v2"
+            android:background="#a5a6a1"
+            app:layout_heightPercent="25%"
+            app:layout_widthPercent="33%"/>
+
+        <View
+            android:id="@+id/v4"
+            android:layout_below="@id/v1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#ffbb00"
+            app:layout_heightPercent="25%"
+            app:layout_widthPercent="25%"/>
+
+        <View
+            android:id="@+id/v5"
+            android:layout_below="@id/v4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#b6bcb0"
+            app:layout_heightPercent="50%"
+            app:layout_widthPercent="25%"/>
+
+        <View
+            android:id="@+id/v6"
+            android:layout_below="@id/v1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_toRightOf="@id/v4"
+            android:background="#994233"
+            app:layout_heightPercent="75%"
+            app:layout_widthPercent="15%"/>
+
+        <View
+            android:id="@+id/v7"
+            android:layout_below="@id/v1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_toRightOf="@id/v6"
+            android:background="#b5b2bc"
+            app:layout_heightPercent="75%"
+            app:layout_widthPercent="25%"/>
+
+        <View
+            android:id="@+id/v8"
+            android:layout_below="@id/v1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_toRightOf="@id/v7"
+            android:background="#a0914e"
+            app:layout_heightPercent="75%"
+            app:layout_widthPercent="35%"/>
+
+    </android.support.percent.PercentRelativeLayout>
+
+</LinearLayout>
