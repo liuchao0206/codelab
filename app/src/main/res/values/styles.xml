@@ -26,4 +26,24 @@
 
     <style name="Widget.Button.Borderless" parent="Widget.AppCompat.Button.Borderless"/>
 
+    <style name="SearchViewTheme" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textColorPrimary">@color/appBodyText1</item>
+        <item name="colorControlNormal">@color/appBodyText2</item>
+        <item name="android:colorControlActivated">@color/colorAccent</item>
+    </style>
+
+    <style name="AutoCompleteTextView" parent="Widget.AppCompat.Light.AutoCompleteTextView">
+        <item name="android:textColorHint">@color/appBodyText2</item>
+        <item name="android:textCursorDrawable">@null</item>
+    </style>
+
+    <style name="AppTheme.Search" parent="AppTheme.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="autoCompleteTextViewStyle">@style/AutoCompleteTextView</item>
+        <item name="searchViewStyle">@style/SearchViewTheme</item>
+        <item name="colorControlNormal">@color/appBodyText2</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+    </style>
+
 </resources>

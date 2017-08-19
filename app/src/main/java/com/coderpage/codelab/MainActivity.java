@@ -8,12 +8,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.coderpage.codelab.codelab.R;
 import com.coderpage.codelab.percentlayout.PercentLayoutActivity;
+import com.coderpage.codelab.search.SearchActivity;
 import com.coderpage.codelab.widget.WidgetActivity;
 
 import butterknife.BindView;
@@ -26,7 +29,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuItemClickListener{
     private static final String TAG = MainActivity.class.getSimpleName();
 
     @BindView(R.id.recycle)
@@ -40,12 +43,31 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
+        toolbar.setOnMenuItemClickListener(this);
 
         mRecyclerView.setLayoutManager(
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setAdapter(new MAdapter());
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        int itemId = item.getItemId();
+        switch (itemId) {
+            case R.id.menu_search:
+                Intent queryIntent = new Intent(this, SearchActivity.class);
+                startActivity(queryIntent);
+                break;
+        }
+        return false;
+    }
+    
     private class MAdapter extends RecyclerView.Adapter<MAdapter.MViewHolder> {
 
         private Item[] mItems = Item.values();

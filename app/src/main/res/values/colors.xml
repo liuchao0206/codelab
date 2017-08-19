@@ -5,5 +5,12 @@
     <color name="colorAccent">#3f51b5</color>
     <color name="colorDefaultWindowBackground">#e6e6e6</color>
     <color name="colorAction">#737373</color>
+    <color name="divider">#1f000000</color>
+
+    <color name="appBodyText1">#de000000</color>
+    <color name="appBodyText2">#8a000000</color>
+    <color name="appBodyTextDisabled">#44000000</color>
+    <color name="appBodyText1Inverse">#deffffff</color>
+    <color name="appBodyText2Inverse">#8affffff</color>
 
 </resources>
