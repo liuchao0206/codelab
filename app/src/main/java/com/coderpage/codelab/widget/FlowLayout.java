@@ -117,9 +117,10 @@ public class FlowLayout extends ViewGroup {
             if (lineWidth + childWidth > width) {
                 lineHeightList.add(lineHeight);
                 viewsInLine.add(lineViews);
-                lineWidth = 0;
+                lineWidth = childWidth;
                 lineHeight = childHeight;
                 lineViews = new ArrayList<>();
+                lineViews.add(child);
             } else {
                 lineViews.add(child);
                 lineWidth += childWidth;
