@@ -27,18 +27,28 @@
             android:name="com.coderpage.codelab.percentlayout.PercentLayoutActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-
         <activity
             android:name="com.coderpage.codelab.search.SearchActivity"
             android:theme="@style/AppTheme.Search">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
             </intent-filter>
+
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable"/>
         </activity>
 
+        <service android:name="com.coderpage.codelab.service.DownloadService">
+            <intent-filter>
+                <action android:name="com.coderpage.codelab.DOWNLOAD_SERVICES"/>
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name="com.coderpage.codelab.service.ServiceActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

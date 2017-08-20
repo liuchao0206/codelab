@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.coderpage.codelab.codelab.R;
 import com.coderpage.codelab.percentlayout.PercentLayoutActivity;
 import com.coderpage.codelab.search.SearchActivity;
+import com.coderpage.codelab.service.ServiceActivity;
 import com.coderpage.codelab.widget.WidgetActivity;
 
 import butterknife.BindView;
@@ -29,7 +30,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuItemClickListener{
+public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuItemClickListener {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     @BindView(R.id.recycle)
@@ -113,6 +114,9 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
                     case PERCENT_LAYOUT:
                         startActivity(new Intent(MainActivity.this, PercentLayoutActivity.class));
                         break;
+                    case SERVICES:
+                        startActivity(new Intent(MainActivity.this, ServiceActivity.class));
+                        break;
                 }
             }
         }
@@ -120,7 +124,8 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
 
     private enum Item {
         WIDGETS("widgets"),
-        PERCENT_LAYOUT("percentLayout");
+        PERCENT_LAYOUT("percentLayout"),
+        SERVICES("service");
 
         private String name;
 
