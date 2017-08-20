@@ -25,6 +25,7 @@ public class ServiceActivity extends AppCompatActivity {
     TextView progressTv;
 
     MServiceConnection mServiceConnection;
+    boolean isBind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +39,15 @@ public class ServiceActivity extends AppCompatActivity {
     public void startDownload(View view) {
         Intent intent = new Intent(this, DownloadService.class);
         mServiceConnection = new MServiceConnection();
-        bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
+        isBind = bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
     @Override
     protected void onDestroy() {
-        unbindService(mServiceConnection);
+        if (mServiceConnection != null && isBind) {
+            unbindService(mServiceConnection);
+            isBind = false;
+        }
         super.onDestroy();
     }
 
@@ -67,6 +71,7 @@ public class ServiceActivity extends AppCompatActivity {
                 }
                 if (progress >= 100) {
                     unbindService(mServiceConnection);
+                    isBind = false;
                 }
             });
         }
