@@ -13,4 +13,7 @@
     <color name="appBodyText1Inverse">#deffffff</color>
     <color name="appBodyText2Inverse">#8affffff</color>
 
+    <color name="tagBgNormal">@color/colorPrimaryDark</color>
+    <color name="tagBgPressed">@color/colorAction</color>
+
 </resources>

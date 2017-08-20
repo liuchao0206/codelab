@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
         }
         return false;
     }
-    
+
     private class MAdapter extends RecyclerView.Adapter<MAdapter.MViewHolder> {
 
         private Item[] mItems = Item.values();
