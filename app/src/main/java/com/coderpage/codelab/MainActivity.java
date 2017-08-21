@@ -1,7 +1,10 @@
 package com.coderpage.codelab;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.coderpage.codelab.codelab.R;
+import com.coderpage.codelab.drawable.DrawableActivity;
 import com.coderpage.codelab.percentlayout.PercentLayoutActivity;
 import com.coderpage.codelab.search.SearchActivity;
 import com.coderpage.codelab.service.ServiceActivity;
@@ -29,6 +33,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+
+import static com.coderpage.codelab.utils.LogUtils.LOGE;
 
 public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuItemClickListener {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -49,6 +55,28 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
         mRecyclerView.setLayoutManager(
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setAdapter(new MAdapter());
+
+        LOGE(TAG, "on create..");
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState, persistentState);
+        LOGE(TAG, "on create with persistent state..");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LOGE(TAG, "on onResume..");
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        LOGE(TAG, "on configuration changed..");
+        LOGE(TAG, "当前屏幕状态= "
+                + (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE ? "横屏" : "竖屏"));
     }
 
     @Override
@@ -117,6 +145,9 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
                     case SERVICES:
                         startActivity(new Intent(MainActivity.this, ServiceActivity.class));
                         break;
+                    case DRAWABLE:
+                        startActivity(new Intent(MainActivity.this, DrawableActivity.class));
+                        break;
                 }
             }
         }
@@ -125,7 +156,8 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
     private enum Item {
         WIDGETS("widgets"),
         PERCENT_LAYOUT("percentLayout"),
-        SERVICES("service");
+        SERVICES("service"),
+        DRAWABLE("drawable");
 
         private String name;
 
