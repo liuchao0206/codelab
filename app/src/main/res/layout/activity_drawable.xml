@@ -8,6 +8,20 @@
     android:orientation="vertical"
     tools:context="com.coderpage.codelab.drawable.DrawableActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:titleTextColor="@color/colorAction"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@drawable/shadow_appbar"/>
+
     <ImageView
         android:id="@+id/iv"
         android:layout_width="100dp"

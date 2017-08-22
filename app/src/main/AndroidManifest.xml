@@ -9,7 +9,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name="com.coderpage.codelab.MainActivity"
             android:configChanges="orientation|screenSize"
@@ -51,6 +51,8 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name="com.coderpage.codelab.drawable.DrawableActivity">
+        </activity>
+        <activity android:name="com.coderpage.codelab.animation.AnimationActivity">
         </activity>
     </application>
 

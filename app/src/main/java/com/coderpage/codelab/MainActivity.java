@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.coderpage.codelab.animation.AnimationActivity;
 import com.coderpage.codelab.codelab.R;
 import com.coderpage.codelab.drawable.DrawableActivity;
 import com.coderpage.codelab.percentlayout.PercentLayoutActivity;
@@ -148,6 +149,9 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
                     case DRAWABLE:
                         startActivity(new Intent(MainActivity.this, DrawableActivity.class));
                         break;
+                    case ANIMATION:
+                        startActivity(new Intent(MainActivity.this, AnimationActivity.class));
+                        break;
                 }
             }
         }
@@ -157,7 +161,8 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
         WIDGETS("widgets"),
         PERCENT_LAYOUT("percentLayout"),
         SERVICES("service"),
-        DRAWABLE("drawable");
+        DRAWABLE("drawable"),
+        ANIMATION("animation");
 
         private String name;
 

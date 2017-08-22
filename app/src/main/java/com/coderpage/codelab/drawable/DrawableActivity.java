@@ -4,9 +4,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
+import com.coderpage.codelab.BaseActivity;
 import com.coderpage.codelab.codelab.R;
 
 import butterknife.BindView;
@@ -16,7 +16,7 @@ import static com.coderpage.codelab.utils.LogUtils.LOGE;
 import static com.coderpage.codelab.utils.LogUtils.makeLogTag;
 
 
-public class DrawableActivity extends AppCompatActivity {
+public class DrawableActivity extends BaseActivity {
     private static final String TAG = makeLogTag(DrawableActivity.class);
 
     @BindView(R.id.iv)
@@ -26,13 +26,16 @@ public class DrawableActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawable);
+        setTitle("Drawable");
         ButterKnife.bind(this);
-
     }
 
     @Override
     public void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+        setToolbarAsBack((view) -> {
+            finish();
+        });
         showPhoto();
     }
 
