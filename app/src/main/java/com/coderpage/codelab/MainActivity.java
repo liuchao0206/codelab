@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.coderpage.codelab.animation.AnimationActivity;
 import com.coderpage.codelab.codelab.R;
 import com.coderpage.codelab.drawable.DrawableActivity;
+import com.coderpage.codelab.jni.JniActivity;
 import com.coderpage.codelab.percentlayout.PercentLayoutActivity;
 import com.coderpage.codelab.search.SearchActivity;
 import com.coderpage.codelab.service.ServiceActivity;
@@ -152,6 +153,9 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
                     case ANIMATION:
                         startActivity(new Intent(MainActivity.this, AnimationActivity.class));
                         break;
+                    case JNI:
+                        startActivity(new Intent(MainActivity.this, JniActivity.class));
+                        break;
                 }
             }
         }
@@ -162,7 +166,8 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
         PERCENT_LAYOUT("percentLayout"),
         SERVICES("service"),
         DRAWABLE("drawable"),
-        ANIMATION("animation");
+        ANIMATION("animation"),
+        JNI("jni");
 
         private String name;
 

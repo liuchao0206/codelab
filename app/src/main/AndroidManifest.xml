@@ -54,6 +54,8 @@
         </activity>
         <activity android:name="com.coderpage.codelab.animation.AnimationActivity">
         </activity>
+        <activity android:name="com.coderpage.codelab.jni.JniActivity">
+        </activity>
     </application>
 
 </manifest>
