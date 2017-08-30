@@ -2,6 +2,9 @@
 <manifest package="com.coderpage.codelab.codelab"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
         android:name="com.coderpage.codelab.LabApplication"
         android:allowBackup="true"
@@ -55,6 +58,8 @@
         <activity android:name="com.coderpage.codelab.animation.AnimationActivity">
         </activity>
         <activity android:name="com.coderpage.codelab.jni.JniActivity">
+        </activity>
+        <activity android:name="com.coderpage.codelab.drawable.PhotoActivity">
         </activity>
     </application>
 

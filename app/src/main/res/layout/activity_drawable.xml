@@ -22,9 +22,46 @@
         android:layout_height="4dp"
         android:background="@drawable/shadow_appbar"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="openPhotoActivity"
+        android:text="open photo activity"/>
+
     <ImageView
         android:id="@+id/iv"
         android:layout_width="100dp"
         android:layout_height="100dp"/>
+
+    <ImageView
+        android:id="@+id/ivMatrix"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:scaleType="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnScale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="缩放"/>
+
+        <Button
+            android:id="@+id/btnInverted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="倒影"/>
+    </LinearLayout>
+
+    <com.coderpage.codelab.drawable.DrawSth
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="@dimen/margin_normal"/>
 
 </LinearLayout>
