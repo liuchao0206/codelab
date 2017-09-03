@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_normal"
+        android:background="@android:color/white"
+        android:clickable="true"
+        card_view:cardCornerRadius="8dp"
+        card_view:cardElevation="@dimen/card_recycler_item_elevation">
+
+        <android.support.percent.PercentRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp">
+
+            <LinearLayout
+                android:id="@+id/lyAbout"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_gravity="left|top"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:orientation="vertical"
+                app:layout_heightPercent="50%"
+                app:layout_widthPercent="33.33%">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    app:srcCompat="@drawable/ic_close"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_normal"
+                    android:gravity="center"
+                    android:text="关于"
+                    android:textColor="@color/appBodyText1"
+                    android:textSize="@dimen/app_text_medium"/>
+
+            </LinearLayout>
+
+        </android.support.percent.PercentRelativeLayout>
+
+    </android.support.v7.widget.CardView>
+</FrameLayout>
+
+

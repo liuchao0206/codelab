@@ -2,6 +2,7 @@ package com.coderpage.codelab;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
@@ -15,6 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.coderpage.codelab.animation.AnimationActivity;
@@ -28,6 +31,7 @@ import com.coderpage.codelab.widget.WidgetActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -202,5 +206,31 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
                         Log.i(TAG, "accept: " + s + "  " + Thread.currentThread().getName());
                     }
                 });
+    }
+
+    @OnClick(R.id.ivMenu)
+    public void openBottomMenu(View view) {
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this,
+                R.style.BottomSheet);
+        View contentView = getLayoutInflater().inflate(R.layout.layout_bottom_menu, null);
+        contentView.findViewById(R.id.lyAbout).setOnClickListener((v) -> {
+            bottomSheetDialog.dismiss();
+        });
+        bottomSheetDialog.setContentView(contentView);
+        bottomSheetDialog.setCanceledOnTouchOutside(true);
+        bottomSheetDialog.show();
+
+        configWindow(bottomSheetDialog.getWindow(), getResources().getColor(R.color.colorAccent));
+    }
+
+    private void configWindow(Window window, int color) {
+        if (window == null) {
+            return;
+        }
+        window.setWindowAnimations(R.style.BottomSheetAnimation);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(color);
+        }
     }
 }
