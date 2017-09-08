@@ -32,6 +32,8 @@ public class AnimationActivity extends BaseActivity {
     ImageView mLoadingIv;
     @BindView(R.id.viewTween)
     View mAnimatorView;
+    @BindView(R.id.mVideoView)
+    MVideoView mVideoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class AnimationActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         showLoadingImage();
+        mVideoView.startTranglesAnimation();
     }
 
     private void showLoadingImage() {

@@ -8,7 +8,6 @@
     android:orientation="vertical"
     tools:context="com.coderpage.codelab.animation.AnimationActivity">
 
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -23,73 +22,89 @@
         android:layout_height="4dp"
         android:background="@drawable/shadow_appbar"/>
 
-    <ImageView
-        android:id="@+id/ivLoading"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center_horizontal"
-        android:paddingTop="@dimen/margin_normal"/>
-
-
-    <View
-        android:id="@+id/viewTween"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:background="@color/colorAccent"/>
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="@dimen/margin_large">
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/alpha"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="alpha"/>
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/translate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="translate"/>
-
-        <Button
-            android:id="@+id/rotate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="rotate"/>
-
-        <Button
-            android:id="@+id/scale"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="scale"/>
-
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/ivLoading"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="@dimen/margin_normal"/>
 
 
-    <Button
-        android:id="@+id/valueAnimator"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_normal"
-        android:text="ValueAnimator"/>
+            <View
+                android:id="@+id/viewTween"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:background="@color/colorAccent"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/margin_large">
+
+                <Button
+                    android:id="@+id/alpha"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="alpha"/>
+
+                <Button
+                    android:id="@+id/translate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="translate"/>
+
+                <Button
+                    android:id="@+id/rotate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="rotate"/>
+
+                <Button
+                    android:id="@+id/scale"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="scale"/>
+
+            </LinearLayout>
 
 
-    <!--<com.coderpage.codelab.animation.SlidingCollapseLayout-->
-    <!--android:layout_width="100dp"-->
-    <!--android:layout_height="200dp"-->
-    <!--android:layout_gravity="center_horizontal"-->
-    <!--android:background="@color/colorAction"-->
-    <!--android:paddingTop="@dimen/margin_large">-->
+            <Button
+                android:id="@+id/valueAnimator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:text="ValueAnimator"/>
 
-    <!--</com.coderpage.codelab.animation.SlidingCollapseLayout>-->
 
+            <com.coderpage.codelab.animation.MVideoView
+                android:id="@+id/mVideoView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <!--<com.coderpage.codelab.animation.SlidingCollapseLayout-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="200dp"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:background="@color/colorAction"-->
+            <!--android:paddingTop="@dimen/margin_large">-->
+
+            <!--</com.coderpage.codelab.animation.SlidingCollapseLayout>-->
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
