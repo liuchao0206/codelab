@@ -132,38 +132,6 @@ public class FloatingMenuLayout extends FrameLayout {
         mWindowWidth = getContext().getResources().getDisplayMetrics().widthPixels;
     }
 
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
-
-        // 如果第一次显示到屏幕，将菜单 item 隐藏（移除屏幕）
-        if (mIsFirstLayout) {
-            mIsFirstLayout = false;
-            if (mMenuViewArray != null && mMenuViewArray.length > 0) {
-                int windowWidth = getResources().getDisplayMetrics().widthPixels;
-                for (View menu : mMenuViewArray) {
-                    menu.setTranslationX(0);
-                    ViewCompat.offsetLeftAndRight(menu, -windowWidth);
-                }
-            }
-        }
-
-    }
-
-    /**
-     * 设置菜单收起和展开动画时间，单位 ms
-     */
-    private void setDuration(int duration) {
-        mDuration = duration;
-    }
-
-    /**
-     * 设置菜单 item 间距，单位 px
-     */
-    public void setMenuMargin(int menuMargin) {
-        mMenuMargin = menuMargin;
-    }
-
     private void setMenuActionView(View menuActionView) {
         mMenuActionView = menuActionView;
         if (menuActionView.getParent() != null) {
@@ -325,6 +293,11 @@ public class FloatingMenuLayout extends FrameLayout {
             if (mCurrentMenuAnimator.isRunning() || mCurrentMenuAnimator.isStarted()) {
                 return;
             }
+        }
+
+        // 如果菜单 item 不可见，设置为可见
+        for (View menu : mMenuViewArray) {
+            menu.setVisibility(VISIBLE);
         }
 
         float menuActionX = mMenuActionView.getX();
@@ -594,6 +567,13 @@ public class FloatingMenuLayout extends FrameLayout {
 
             floatingMenu.setMenuViewArray(mMenuViewArray);
             floatingMenu.setMenuActionView(mMenuActionView);
+
+            // 隐藏 菜单 item
+            if (mMenuViewArray != null) {
+                for (View menu : mMenuViewArray) {
+                    menu.setVisibility(INVISIBLE);
+                }
+            }
 
             mParent.addView(floatingMenu);
 
