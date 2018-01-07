@@ -65,7 +65,7 @@ public class FloatingMenuLayout extends FrameLayout {
     /** 拖拽帮助类 */
     private final ViewDragHelper mDragHelper;
 
-    private MenuStateChangeListener mMenuStateChangeListener;
+    private MenuActionListener mMenuActionListener;
 
     /** ViewDragHelper 回调 */
     private class DragHelperCallback extends ViewDragHelper.Callback {
@@ -249,10 +249,13 @@ public class FloatingMenuLayout extends FrameLayout {
                     } else if (menuState() == MENU_EXPAND) {
                         retractMenus();
                     }
+                    break;
                 }
 
-                // 如果点击的是 menu，将点击事件交给 menu 处理
-                eventUpTouchedView.performClick();
+                // 如果点击的是 menu，回调点击事件
+                if (mMenuActionListener != null) {
+                    mMenuActionListener.onMenuClick(this, eventUpTouchedView);
+                }
                 break;
             default:
                 break;
@@ -270,6 +273,9 @@ public class FloatingMenuLayout extends FrameLayout {
         return mDragViewOnCaptured;
     }
 
+    /**
+     * 查找 (x,y) 坐标对应的 view
+     */
     private View findTopChildUnder(int x, int y) {
         final int childCount = getChildCount();
         for (int i = childCount - 1; i >= 0; i--) {
@@ -302,7 +308,7 @@ public class FloatingMenuLayout extends FrameLayout {
         // 执行动画
         ObjectAnimator alignSideAnimator = ObjectAnimator.ofFloat(mMenuActionView, "x", startX, destinationX);
         alignSideAnimator.setInterpolator(new LinearInterpolator());
-        alignSideAnimator.setDuration(200);
+        alignSideAnimator.setDuration(100);
         alignSideAnimator.start();
     }
 
@@ -464,22 +470,22 @@ public class FloatingMenuLayout extends FrameLayout {
 
     private void onMenuExpand() {
         mMenuState = MENU_EXPAND;
-        if (mMenuStateChangeListener != null) {
-            mMenuStateChangeListener.onStateChange(this,mMenuActionView, mMenuState);
+        if (mMenuActionListener != null) {
+            mMenuActionListener.onStateChange(this, mMenuActionView, mMenuState);
         }
     }
 
     private void onMenuRetract() {
         mMenuState = MENU_RETRACT;
-        if (mMenuStateChangeListener != null) {
-            mMenuStateChangeListener.onStateChange(this,mMenuActionView, mMenuState);
+        if (mMenuActionListener != null) {
+            mMenuActionListener.onStateChange(this, mMenuActionView, mMenuState);
         }
     }
 
     /**
      * 菜单状态监听，菜单收起、展开监听
      */
-    public interface MenuStateChangeListener {
+    public interface MenuActionListener {
         /**
          * 菜单收起或展开时被回调
          *
@@ -488,6 +494,14 @@ public class FloatingMenuLayout extends FrameLayout {
          * @param currentState   菜单当前最新的状态{@link #MENU_EXPAND} {@link #MENU_RETRACT}
          */
         void onStateChange(FloatingMenuLayout layout, View menuActionView, int currentState);
+
+        /**
+         * 当 menu 被点击时回调
+         *
+         * @param layout {@link FloatingMenuLayout}
+         * @param menu   被点击的 menu
+         */
+        void onMenuClick(FloatingMenuLayout layout, View menu);
     }
 
     public static class Builder {
@@ -507,7 +521,7 @@ public class FloatingMenuLayout extends FrameLayout {
         /** {@link FloatingMenuLayout} 的布局参数 */
         private ViewGroup.LayoutParams mLayoutParams;
 
-        private MenuStateChangeListener mMenuStateChangeListener;
+        private MenuActionListener mMenuStateChangeListener;
 
         /**
          * @param parent         {@link FloatingMenuLayout} 的父控件，建议{@link FrameLayout}
@@ -556,7 +570,7 @@ public class FloatingMenuLayout extends FrameLayout {
         /**
          * 设置菜单状态变化监听
          */
-        public Builder setMenuStatChangeListener(MenuStateChangeListener listener) {
+        public Builder setMenuStatChangeListener(MenuActionListener listener) {
             mMenuStateChangeListener = listener;
             return this;
         }
@@ -565,7 +579,7 @@ public class FloatingMenuLayout extends FrameLayout {
             FloatingMenuLayout floatingMenu = new FloatingMenuLayout(context);
             floatingMenu.mMenuMargin = dip2px(context, mMenuMarginDip);
             floatingMenu.mDuration = mDuration;
-            floatingMenu.mMenuStateChangeListener = mMenuStateChangeListener;
+            floatingMenu.mMenuActionListener = mMenuStateChangeListener;
 
             if (mLayoutParams != null) {
                 floatingMenu.setLayoutParams(mLayoutParams);

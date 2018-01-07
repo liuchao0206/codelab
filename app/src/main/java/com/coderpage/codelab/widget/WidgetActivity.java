@@ -43,24 +43,27 @@ public class WidgetActivity extends AppCompatActivity {
 //
 
 
+        final String menuTag1 = "menu_1";
+        final String menuTag2 = "menu_2";
+
         ImageView menuActionView = new ImageView(this);
         menuActionView.setBackgroundResource(R.drawable.page_loading_02);
         menuActionView.setLayoutParams(new FloatingMenuLayout.LayoutParams(180, 180));
 
-
         ImageView menuView = new ImageView(this);
         menuView.setBackgroundResource(R.drawable.page_loading_02);
         menuView.setLayoutParams(new FloatingMenuLayout.LayoutParams(150, 150));
-
+        menuView.setTag(menuTag1);
 
         ImageView menuView1 = new ImageView(this);
         menuView1.setBackgroundResource(R.drawable.page_loading_02);
         menuView1.setLayoutParams(new FloatingMenuLayout.LayoutParams(150, 150));
+        menuView1.setTag(menuTag2);
 
         FloatingMenuLayout floatingMenuLayout = new FloatingMenuLayout
                 .Builder(floatParent, menuActionView)
                 .setMenu(menuView, menuView1)
-                .setMenuStatChangeListener(new FloatingMenuLayout.MenuStateChangeListener() {
+                .setMenuStatChangeListener(new FloatingMenuLayout.MenuActionListener() {
                     @Override
                     public void onStateChange(FloatingMenuLayout layout, View menuActionView, int currentState) {
                         if (currentState == FloatingMenuLayout.MENU_EXPAND) {
@@ -69,24 +72,19 @@ public class WidgetActivity extends AppCompatActivity {
                             menuActionView.setBackgroundResource(R.drawable.page_loading_02);
                         }
                     }
+
+                    @Override
+                    public void onMenuClick(FloatingMenuLayout layout, View menu) {
+                        if (String.valueOf(menu.getTag()).equals(menuTag1)) {
+                            Toast.makeText(WidgetActivity.this, "click 1", Toast.LENGTH_SHORT).show();
+                        }
+                        if (String.valueOf(menu.getTag()).equals(menuTag2)) {
+                            Toast.makeText(WidgetActivity.this, "click 2", Toast.LENGTH_SHORT).show();
+                        }
+                        layout.retractMenus();
+                    }
                 })
                 .build(this);
-
-        menuView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                floatingMenuLayout.retractMenus();
-                Toast.makeText(WidgetActivity.this, "click 1", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        menuView1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                floatingMenuLayout.retractMenus();
-                Toast.makeText(WidgetActivity.this, "click 2", Toast.LENGTH_SHORT).show();
-            }
-        });
 
     }
 
