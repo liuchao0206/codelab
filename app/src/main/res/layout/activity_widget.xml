@@ -88,4 +88,38 @@
 
     </com.coderpage.codelab.widget.FlowLayout>
 
+
+    <com.coderpage.codelab.widget.ShadowLayout
+        android:layout_marginTop="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="#fff"
+        app:sl_shadowColor="#AA000000"
+        app:sl_cornerRadius="0dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="88dp"
+            android:minHeight="36dp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:background="@color/colorAccent"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:text="button"/>
+
+    </com.coderpage.codelab.widget.ShadowLayout>
+
+    <!--<FrameLayout-->
+        <!--android:clickable="true"-->
+        <!--android:foreground="?attr/selectableItemBackground"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="200dp"-->
+        <!--android:layout_margin="32dp"-->
+        <!--android:background="#fff"-->
+        <!--android:translationZ="4dp">-->
+
+    <!--</FrameLayout>-->
+
 </LinearLayout>
