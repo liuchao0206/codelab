@@ -358,7 +358,8 @@ public class FloatingMenuLayout extends FrameLayout {
             } else {
                 pvhX = PropertyValuesHolder.ofFloat(View.TRANSLATION_X, 0);
             }
-            ObjectAnimator animation = ObjectAnimator.ofPropertyValuesHolder(menu, pvhX);
+            PropertyValuesHolder pvhAlpha = PropertyValuesHolder.ofFloat(View.ALPHA, 1);
+            ObjectAnimator animation = ObjectAnimator.ofPropertyValuesHolder(menu, pvhX, pvhAlpha);
             animation.setDuration(mDuration);
             animation.setInterpolator(new OvershootInterpolator(0.9f));
             menuAnimatorList.add(animation);
@@ -398,7 +399,8 @@ public class FloatingMenuLayout extends FrameLayout {
             }
 
             PropertyValuesHolder pvhX = PropertyValuesHolder.ofFloat(View.TRANSLATION_X, menuActionX - menu.getX());
-            ObjectAnimator animation = ObjectAnimator.ofPropertyValuesHolder(menu, pvhX);
+            PropertyValuesHolder pvhAlpha = PropertyValuesHolder.ofFloat(View.ALPHA, 0);
+            ObjectAnimator animation = ObjectAnimator.ofPropertyValuesHolder(menu, pvhX, pvhAlpha);
             animation.setDuration(mDuration);
             animation.setInterpolator(new OvershootInterpolator(0.9f));
             menuAnimatorList.add(animation);
