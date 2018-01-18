@@ -7,6 +7,7 @@ import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.SimpleAdapter;
 
 import com.coderpage.codelab.codelab.R;
 
@@ -62,6 +63,8 @@ public abstract class BaseActivity extends AppCompatActivity {
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintResource(resId);
         }
+
+        SimpleAdapter simpleAdapter = new SimpleAdapter()
     }
 
     protected int statusBarColor() {

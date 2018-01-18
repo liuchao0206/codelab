@@ -6,6 +6,8 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MotionEventCompat;
@@ -40,8 +42,6 @@ public class FloatingMenuLayout extends FrameLayout {
 
     /** menuActionView 是否被 ViewDragHelper 捕获，如果被捕获说明正在拖拽中 */
     private boolean mDragViewOnCaptured = false;
-    /** 是否是第一次 layout */
-    private boolean mIsFirstLayout = true;
 
     /** 当前菜单状态 {@link #MENU_RETRACT} {@link #MENU_EXPAND} */
     private int mMenuState = MENU_RETRACT;
@@ -524,18 +524,6 @@ public class FloatingMenuLayout extends FrameLayout {
             return this;
         }
 
-        /**
-         * 设置 {@link FloatingMenuLayout} 的父控件，也是浮动拖拽区域
-         *
-         * @param parent {@link FloatingMenuLayout} 的父控件，建议{@link FrameLayout}
-         * @param lp     {@link FloatingMenuLayout} 的布局参数
-         */
-        public Builder setFloatParent(ViewGroup parent, ViewGroup.LayoutParams lp) {
-            mParent = parent;
-            mLayoutParams = lp;
-            return this;
-        }
-
         /** 设置菜单入口初始化位置，默认是 右边中间 */
         public Builder setMenuInitGravity(int gravity) {
             mMenuActionViewInitGravity = gravity;
@@ -615,5 +603,99 @@ public class FloatingMenuLayout extends FrameLayout {
         public LayoutParams(@NonNull LayoutParams source) {
             super(source);
         }
+    }
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Parcelable superState = super.onSaveInstanceState();
+        SavedState ss = new SavedState(superState);
+
+        ss.mDragViewOnCaptured = mDragViewOnCaptured;
+
+        ss.mMenuState = mMenuState;
+        ss.mMenuMargin = mMenuMargin;
+        ss.mDuration = mDuration;
+        ss.mWindowWidth = mWindowWidth;
+
+        ss.mTouchDownX = mTouchDownX;
+        ss.mTouchDownY = mTouchDownY;
+        return ss;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        SavedState ss = (SavedState) state;
+
+        mDragViewOnCaptured = ss.mDragViewOnCaptured;
+
+        mMenuState = ss.mMenuState;
+        mMenuMargin = ss.mMenuMargin;
+        mDuration = ss.mDuration;
+        mWindowWidth = ss.mWindowWidth;
+
+        mTouchDownX = ss.mTouchDownX;
+        mTouchDownY = ss.mTouchDownY;
+
+        super.onRestoreInstanceState(ss.getSuperState());
+    }
+
+    static class SavedState extends BaseSavedState {
+
+        private boolean mDragViewOnCaptured = false;
+
+        private int mMenuState = MENU_RETRACT;
+        private int mMenuMargin;
+        private int mDuration = 200;
+        private int mWindowWidth;
+
+        private float mTouchDownX;
+        private float mTouchDownY;
+
+        SavedState(Parcelable superState) {
+            super(superState);
+        }
+
+        public SavedState(Parcel in) {
+            super(in);
+            mDragViewOnCaptured = Boolean.valueOf(in.readString());
+
+            mMenuState = in.readInt();
+            mMenuMargin = in.readInt();
+            mDuration = in.readInt();
+            mWindowWidth = in.readInt();
+
+            mTouchDownX = in.readFloat();
+            mTouchDownY = in.readFloat();
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
+            out.writeString(Boolean.toString(mDragViewOnCaptured));
+
+            out.writeInt(mMenuState);
+            out.writeInt(mMenuMargin);
+            out.writeInt(mDuration);
+            out.writeInt(mWindowWidth);
+
+            out.writeFloat(mTouchDownX);
+            out.writeFloat(mTouchDownY);
+        }
+
+        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
+            @Override
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
+
+            @Override
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
     }
 }
