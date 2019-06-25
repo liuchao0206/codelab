@@ -25,6 +25,7 @@ import com.coderpage.codelab.animation.AnimationActivity;
 import com.coderpage.codelab.ble.BleActivity;
 import com.coderpage.codelab.codelab.R;
 import com.coderpage.codelab.drawable.DrawableActivity;
+import com.coderpage.codelab.fingerprint.FingerPrintActivity;
 import com.coderpage.codelab.jni.JniActivity;
 import com.coderpage.codelab.percentlayout.PercentLayoutActivity;
 import com.coderpage.codelab.search.SearchActivity;
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
 
         LOGE(TAG, "on create..");
 
-        Toast.makeText(this,"百度渠道",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "百度渠道", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -197,6 +198,11 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
                     case BLE:
                         startActivity(new Intent(MainActivity.this, BleActivity.class));
                         break;
+                    case FINGERPRINT:
+                        startActivity(new Intent(MainActivity.this, FingerPrintActivity.class));
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -209,7 +215,9 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
         DRAWABLE("drawable"),
         ANIMATION("animation"),
         JNI("jni"),
-        BLE("bluetooth");
+        BLE("bluetooth"),
+        FINGERPRINT("fingerprint"),
+        ;
 
         private String name;
 

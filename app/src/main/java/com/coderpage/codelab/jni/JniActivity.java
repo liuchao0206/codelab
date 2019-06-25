@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 import com.coderpage.codelab.BaseActivity;
 import com.coderpage.codelab.codelab.R;
-import com.coderpage.libjni.NativeInterface;
+//import com.coderpage.libjni.NativeInterface;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +24,7 @@ public class JniActivity extends BaseActivity {
         setToolbarAsBack(v -> finish());
         ButterKnife.bind(this);
 
-        tv.setText(new NativeInterface().stringFromJni());
-        tv.append("JNI Add 1+1=" + new NativeInterface().add(1, 1));
+        //tv.setText(new NativeInterface().stringFromJni());
+        //tv.append("JNI Add 1+1=" + new NativeInterface().add(1, 1));
     }
 }

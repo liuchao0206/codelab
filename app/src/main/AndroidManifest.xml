@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
 
     <application
         android:name="com.coderpage.codelab.LabApplication"
@@ -70,8 +71,9 @@
         </activity>
         <activity android:name="com.coderpage.codelab.drawable.PhotoActivity">
         </activity>
-        <activity android:name="com.coderpage.codelab.ble.BleActivity">
-        </activity>
+        <activity android:name="com.coderpage.codelab.ble.BleActivity"/>
+
+        <activity android:name="com.coderpage.codelab.fingerprint.FingerPrintActivity"/>
 
         <meta-data
             android:name="CHANNEL"
