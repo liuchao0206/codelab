@@ -4,8 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/codelab.iml" filepath="$PROJECT_DIR$/.idea/codelab.iml" />
-      <module fileurl="file://$PROJECT_DIR$/codelab.iml" filepath="$PROJECT_DIR$/codelab.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libjni/libjni.iml" filepath="$PROJECT_DIR$/libjni/libjni.iml" />
     </modules>
   </component>
 </project>

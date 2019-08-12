@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -21,7 +20,7 @@
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="Widgets"
-            app:titleTextColor="@color/colorAction"/>
+            app:titleTextColor="@color/colorAction" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -40,7 +39,7 @@
         app:rpbPercentTextColor="?android:textColorHint"
         app:rpbPercentTextSize="12sp"
         app:rpbTextColor="?android:textColorPrimary"
-        app:rpbTextSize="14sp"/>
+        app:rpbTextSize="14sp" />
 
     <com.coderpage.codelab.widget.FlowLayout
         android:layout_width="match_parent"
@@ -48,78 +47,143 @@
 
         <TextView
             style="@style/TagView"
-            android:text="激荡三十年"/>
+            android:text="激荡三十年" />
 
         <TextView
             style="@style/TagView"
-            android:text="假面前夜"/>
+            android:text="假面前夜" />
 
         <TextView
             style="@style/TagView"
-            android:text="红手指"/>
+            android:text="红手指" />
 
         <TextView
             style="@style/TagView"
-            android:text="在细雨中呼喊"/>
+            android:text="在细雨中呼喊" />
 
         <TextView
             style="@style/TagView"
-            android:text="岛上书店"/>
+            android:text="岛上书店" />
 
         <TextView
             style="@style/TagView"
-            android:text="杀死一只知更鸟"/>
+            android:text="杀死一只知更鸟" />
 
         <TextView
             style="@style/TagView"
-            android:text="人类简史"/>
+            android:text="人类简史" />
 
         <TextView
             style="@style/TagView"
-            android:text="人生"/>
+            android:text="人生" />
 
         <TextView
             style="@style/TagView"
-            android:text="百年孤独"/>
+            android:text="百年孤独" />
 
         <TextView
             style="@style/TagView"
-            android:text="白夜行"/>
+            android:text="白夜行" />
 
     </com.coderpage.codelab.widget.FlowLayout>
 
 
     <com.coderpage.codelab.widget.ShadowLayout
-        android:layout_marginTop="32dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="32dp"
         android:background="#fff"
-        app:sl_shadowColor="#AA000000"
-        app:sl_cornerRadius="0dp">
+        app:sl_cornerRadius="0dp"
+        app:sl_shadowColor="#AA000000">
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:gravity="center"
             android:minWidth="88dp"
             android:minHeight="36dp"
-            android:gravity="center"
-            android:textColor="@android:color/white"
-            android:background="@color/colorAccent"
+            android:text="button"
             android:textAppearance="@style/TextAppearance.AppCompat.Button"
-            android:text="button"/>
+            android:textColor="@android:color/white" />
 
     </com.coderpage.codelab.widget.ShadowLayout>
 
-    <!--<FrameLayout-->
-        <!--android:clickable="true"-->
-        <!--android:foreground="?attr/selectableItemBackground"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="200dp"-->
-        <!--android:layout_margin="32dp"-->
-        <!--android:background="#fff"-->
-        <!--android:translationZ="4dp">-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    <!--</FrameLayout>-->
+        <com.coderpage.codelab.widget.datepick.WheelView
+            android:id="@+id/wheel_year"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="20dp"
+            app:wvItemDisplayCount="5"
+            app:wvItemDivider="8dp"
+            app:wvLoop="false"
+            app:wvTextColorAccent="@color/colorAccent"
+            app:wvTextColorWeak="#55999999"
+            app:wvTextSize="@dimen/app_text_large" />
+
+        <com.coderpage.codelab.widget.datepick.WheelView
+            android:id="@+id/wheel_month"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="20dp"
+            app:wvItemDisplayCount="5"
+            app:wvItemDivider="8dp"
+            app:wvLoop="false"
+            app:wvTextColorAccent="@color/colorAccent"
+            app:wvTextColorWeak="#55999999"
+            app:wvTextSize="@dimen/app_text_large" />
+
+        <com.coderpage.codelab.widget.datepick.WheelView
+            android:id="@+id/wheel_day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="20dp"
+            app:wvItemDisplayCount="5"
+            app:wvItemDivider="8dp"
+            app:wvLoop="false"
+            app:wvTextColorAccent="@color/colorAccent"
+            app:wvTextColorWeak="#55999999"
+            app:wvTextSize="@dimen/app_text_large" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edit_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="100dp" />
+
+        <Button
+            android:id="@+id/button_set_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SET POSITION" />
+
+    </LinearLayout>
+
+    <com.coderpage.codelab.widget.BottomDrawerLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BUTTON" />
+    </com.coderpage.codelab.widget.BottomDrawerLayout>
+
 
 </LinearLayout>

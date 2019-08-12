@@ -2,17 +2,26 @@
 <resources>
 
     <declare-styleable name="RoundPercentBar">
-        <attr name="rpbBaseColor" format="color"/>
-        <attr name="rpbPercentBarColor" format="color"/>
-        <attr name="rpbBarWidth" format="dimension"/>
-        <attr name="rpbDrawPercentVal" format="boolean"/>
-        <attr name="rpbTextColor" format="color"/>
-        <attr name="rpbPercentTextColor" format="color"/>
-        <attr name="rpbTextSize" format="dimension"/>
-        <attr name="rpbPercentTextSize" format="dimension"/>
-        <attr name="rpbHintText" format="string|reference"/>
-        <attr name="rpbHintTextColor" format="color"/>
-        <attr name="rpbHintTextSize" format="dimension"/>
+        <attr name="rpbBaseColor" format="color" />
+        <attr name="rpbPercentBarColor" format="color" />
+        <attr name="rpbBarWidth" format="dimension" />
+        <attr name="rpbDrawPercentVal" format="boolean" />
+        <attr name="rpbTextColor" format="color" />
+        <attr name="rpbPercentTextColor" format="color" />
+        <attr name="rpbTextSize" format="dimension" />
+        <attr name="rpbPercentTextSize" format="dimension" />
+        <attr name="rpbHintText" format="string|reference" />
+        <attr name="rpbHintTextColor" format="color" />
+        <attr name="rpbHintTextSize" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="WheelView">
+        <attr name="wvTextColorAccent" format="color" />
+        <attr name="wvTextColorWeak" format="color" />
+        <attr name="wvTextSize" format="dimension" />
+        <attr name="wvLoop" format="boolean" />
+        <attr name="wvItemDivider" format="dimension" />
+        <attr name="wvItemDisplayCount" format="integer" />
     </declare-styleable>
 
 </resources>

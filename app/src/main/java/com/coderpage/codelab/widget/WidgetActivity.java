@@ -1,30 +1,51 @@
 package com.coderpage.codelab.widget;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.coderpage.codelab.codelab.R;
-import com.coderpage.codelab.widget.floating.FloatViewService;
+import com.coderpage.codelab.widget.datepick.BaseWheelAdapter;
+import com.coderpage.codelab.widget.datepick.WheelView;
 import com.coderpage.codelab.widget.floating.FloatingMenuLayout;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class WidgetActivity extends AppCompatActivity {
 
     @BindView(R.id.rpb)
     RoundPercentBar mRpb;
+
+    @BindView(R.id.wheel_year)
+    WheelView mWheelYear;
+    @BindView(R.id.wheel_month)
+    WheelView mWheelMonth;
+    @BindView(R.id.wheel_day)
+    WheelView mWheelDay;
+
+    @BindView(R.id.edit_position)
+    EditText mPositionEt;
+
+    private BaseWheelAdapter mYearAdapter;
+    private BaseWheelAdapter mMonthAdapter;
+    private BaseWheelAdapter mDayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,25 +121,157 @@ public class WidgetActivity extends AppCompatActivity {
                 })
                 .build(this);
 
+        initDatePicker();
     }
 
+    private void initDatePicker() {
+
+        final ArrayList<Integer> yearList = new ArrayList<>();
+        final ArrayList<Integer> monthList = new ArrayList<>();
+        final ArrayList<Integer> dayList = new ArrayList<>();
+
+        Calendar calendar = Calendar.getInstance();
+        int currentYear = calendar.get(Calendar.YEAR);
+        int currentMonth = calendar.get(Calendar.MONTH);
+        int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
+
+        for (int i = 1992; i <= currentYear; i++) {
+            yearList.add(i);
+        }
+        for (int i = 1; i <= 12; i++) {
+            monthList.add(i);
+        }
+        dayList.addAll(getMonthDays(currentYear, currentMonth + 1));
+
+        mYearAdapter = new BaseWheelAdapter() {
+
+            @Override
+            public int getCount() {
+                return yearList.size();
+            }
+
+            @Override
+            public String getText(int position) {
+                return String.valueOf(yearList.get(position));
+            }
+        };
+        mMonthAdapter = new BaseWheelAdapter() {
+
+            @Override
+            public int getCount() {
+                return monthList.size();
+            }
+
+            @Override
+            public String getText(int position) {
+                return String.valueOf(monthList.get(position));
+            }
+        };
+        mDayAdapter = new BaseWheelAdapter() {
+
+            @Override
+            public int getCount() {
+                return dayList.size();
+            }
+
+            @Override
+            public String getText(int position) {
+                return String.valueOf(dayList.get(position));
+            }
+        };
+
+        mWheelYear.setListener(position -> {
+            Integer year = yearList.get(position);
+            Integer month = monthList.get(mWheelMonth.getSelectPosition());
+            int dayCount = getMonthDayCount(year, month);
+            if (dayCount != dayList.size()) {
+                dayList.clear();
+                dayList.addAll(getMonthDays(year, month));
+                mDayAdapter.notifyDataSetChanged();
+            }
+        });
+        mWheelMonth.setListener(position -> {
+            Integer year = yearList.get(mWheelYear.getSelectPosition());
+            Integer month = monthList.get(position);
+            int dayCount = getMonthDayCount(year, month);
+            if (dayCount != dayList.size()) {
+                dayList.clear();
+                dayList.addAll(getMonthDays(year, month));
+                mDayAdapter.notifyDataSetChanged();
+            }
+        });
+
+        mWheelYear.setAdapter(mYearAdapter);
+        mWheelMonth.setAdapter(mMonthAdapter);
+        mWheelDay.setAdapter(mDayAdapter);
+
+        new Handler().post(() -> {
+            mWheelYear.setSelectPosition(yearList.size() - 1);
+            mWheelMonth.setSelectPosition(currentMonth);
+            mWheelDay.setSelectPosition(currentDay - 1);
+        });
+    }
+
+    /**
+     * @param year  年
+     * @param month 月（1-12）
+     */
+    private List<Integer> getMonthDays(int year, int month) {
+        int daysCount = getMonthDayCount(year, month);
+        List<Integer> daysList = new ArrayList<>(daysCount);
+        for (int i = 1; i <= daysCount; i++) {
+            daysList.add(i);
+        }
+        return daysList;
+    }
+
+    private int getMonthDayCount(int year, int month) {
+        int daysCount = 30;
+        if (month == 1
+                || month == 3
+                || month == 5
+                || month == 7
+                || month == 8
+                || month == 10
+                || month == 12) {
+            daysCount = 31;
+        }
+        if (month == 2) {
+            daysCount = year % 4 == 0 ? 29 : 28;
+        }
+        return daysCount;
+    }
+
+    @OnClick(R.id.button_set_position)
+    public void onSetPositionClick(View view) {
+        mWheelYear.setSelectPosition(string2Int(mPositionEt.getText().toString()));
+    }
 
     private int dip2px(float dpValue) {
         final float scale = getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
 
+    private int string2Int(String str) {
+        try {
+            return Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
     @Override
     protected void onStart() {
-        Intent intent = new Intent(this, FloatViewService.class);
-        startService(intent);
+        // Intent intent = new Intent(this, FloatViewService.class);
+        // startService(intent);
         super.onStart();
     }
 
     @Override
     protected void onStop() {
-        Intent intent = new Intent(this, FloatViewService.class);
-        stopService(intent);
+        // Intent intent = new Intent(this, FloatViewService.class);
+        // stopService(intent);
         super.onStop();
     }
 }
