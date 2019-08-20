@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
 import android.text.TextPaint;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -59,6 +60,12 @@ public class WheelView extends View {
     private int mTextColorAccent = Color.BLACK;
     /** 文字颜色-弱化的状态 */
     private int mTextColorWeak = Color.BLACK;
+    /** 单位文字大小 px */
+    private int mTextUnitSize;
+    /** 单位文字颜色 */
+    private int mTextUnitColor;
+    /** 单位 */
+    private String mTextUnit;
 
     /** 显示的数量 */
     private int mDisplayCount = 5;
@@ -78,6 +85,9 @@ public class WheelView extends View {
 
     private Paint.FontMetrics mFontMetrics = new Paint.FontMetrics();
     private TextPaint mTextPaint;
+    /** 单位 paint */
+    private Paint.FontMetrics mTextUnitFontMetrics = new Paint.FontMetrics();
+    private TextPaint mTextUnitPaint;
 
     /** 检查用户滑动速度 */
     private VelocityTracker mVelocityTracker;
@@ -123,6 +133,9 @@ public class WheelView extends View {
         mTextSize = typedArray.getDimensionPixelSize(R.styleable.WheelView_wvTextSize, dp2Px(14));
         mTextColorAccent = typedArray.getColor(R.styleable.WheelView_wvTextColorAccent, Color.BLACK);
         mTextColorWeak = typedArray.getColor(R.styleable.WheelView_wvTextColorWeak, Color.BLACK);
+        mTextUnitSize = typedArray.getDimensionPixelSize(R.styleable.WheelView_wvTextUnitSize, dp2Px(9));
+        mTextUnitColor = typedArray.getColor(R.styleable.WheelView_wvTextUnitColor, Color.BLACK);
+        mTextUnit = typedArray.getString(R.styleable.WheelView_wvTextUnit);
         mItemDivider = typedArray.getDimensionPixelSize(R.styleable.WheelView_wvItemDivider, dp2Px(8));
         mLoop = typedArray.getBoolean(R.styleable.WheelView_wvLoop, false);
         mDisplayCount = typedArray.getInt(R.styleable.WheelView_wvItemDisplayCount, 5);
@@ -133,6 +146,12 @@ public class WheelView extends View {
         mTextPaint.setTextSize(mTextSize);
         mTextPaint.setColor(mTextColorAccent);
         mTextPaint.getFontMetrics(mFontMetrics);
+
+        mTextUnitPaint = new TextPaint();
+        mTextUnitPaint.setAntiAlias(true);
+        mTextUnitPaint.setTextSize(mTextUnitSize);
+        mTextUnitPaint.setColor(mTextUnitColor);
+        mTextUnitPaint.getFontMetrics(mTextUnitFontMetrics);
 
         ViewConfiguration vc = ViewConfiguration.get(context);
         mMinFlingVelocity = vc.getScaledMinimumFlingVelocity();
@@ -467,6 +486,21 @@ public class WheelView extends View {
             String text = mAdapter.getText(i);
             canvas.drawText(text, Math.abs((width - textBounds.width()) / 2), baseLine, mTextPaint);
         }
+
+        drawUnit(canvas);
+    }
+
+    private void drawUnit(Canvas canvas) {
+        if (TextUtils.isEmpty(mTextUnit)) {
+            return;
+        }
+        // 文字绘制区域 top、bottom
+        int top = getPaddingTop();
+        int bottom = getMeasuredHeight() - getPaddingBottom();
+
+        float unitTextBaseLine = (bottom + top - mTextUnitFontMetrics.bottom - mTextUnitFontMetrics.top) / 2;
+        int x = Math.abs((getMeasuredWidth() - mMaxTextBounds.width()) / 2) + mMaxTextBounds.width() + dp2Px(4);
+        canvas.drawText(mTextUnit, x, unitTextBaseLine, mTextUnitPaint);
     }
 
     private int dp2Px(float dpValue) {

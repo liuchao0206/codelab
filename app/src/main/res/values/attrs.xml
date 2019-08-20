@@ -19,6 +19,9 @@
         <attr name="wvTextColorAccent" format="color" />
         <attr name="wvTextColorWeak" format="color" />
         <attr name="wvTextSize" format="dimension" />
+        <attr name="wvTextUnitSize" format="dimension" />
+        <attr name="wvTextUnitColor" format="color" />
+        <attr name="wvTextUnit" format="string" />
         <attr name="wvLoop" format="boolean" />
         <attr name="wvItemDivider" format="dimension" />
         <attr name="wvItemDisplayCount" format="integer" />

@@ -126,7 +126,10 @@
             app:wvLoop="false"
             app:wvTextColorAccent="@color/colorAccent"
             app:wvTextColorWeak="#55999999"
-            app:wvTextSize="@dimen/app_text_large" />
+            app:wvTextSize="@dimen/app_text_large"
+            app:wvTextUnit="年"
+            app:wvTextUnitColor="@color/colorAccent"
+            app:wvTextUnitSize="@dimen/app_text_micro" />
 
         <com.coderpage.codelab.widget.datepick.WheelView
             android:id="@+id/wheel_month"
@@ -139,7 +142,10 @@
             app:wvLoop="false"
             app:wvTextColorAccent="@color/colorAccent"
             app:wvTextColorWeak="#55999999"
-            app:wvTextSize="@dimen/app_text_large" />
+            app:wvTextSize="@dimen/app_text_large"
+            app:wvTextUnit="月"
+            app:wvTextUnitColor="@color/colorAccent"
+            app:wvTextUnitSize="@dimen/app_text_micro" />
 
         <com.coderpage.codelab.widget.datepick.WheelView
             android:id="@+id/wheel_day"
@@ -152,7 +158,10 @@
             app:wvLoop="false"
             app:wvTextColorAccent="@color/colorAccent"
             app:wvTextColorWeak="#55999999"
-            app:wvTextSize="@dimen/app_text_large" />
+            app:wvTextSize="@dimen/app_text_large"
+            app:wvTextUnit="日"
+            app:wvTextUnitColor="@color/colorAccent"
+            app:wvTextUnitSize="@dimen/app_text_micro" />
     </LinearLayout>
 
 
