@@ -95,7 +95,7 @@ public class WheelView extends View {
             mCurrentPosition = Math.min(itemCount - 1, mCurrentPosition);
             mCurrentPosition = Math.max(0, mCurrentPosition);
             calculateTextBounds();
-            calculateBaseLine();
+            calculateCurrentBaseLine();
             setSelectPosition(mCurrentPosition);
         }
 
@@ -155,7 +155,7 @@ public class WheelView extends View {
         mCurrentPosition = Math.min(itemCount - 1, mCurrentPosition);
         mCurrentPosition = Math.max(0, mCurrentPosition);
         calculateTextBounds();
-        calculateBaseLine();
+        calculateCurrentBaseLine();
         setSelectPosition(mCurrentPosition);
     }
 
@@ -164,8 +164,7 @@ public class WheelView extends View {
     }
 
     public void setSelectPosition(int position) {
-        invalidate();
-        int itemCount = mAdapter == null ? 0 : mAdapter.getCount();
+        int itemCount = getItemCount();
         if (position < 0 || position >= itemCount) {
             Log.e(TAG, "invalid position " + position + "  totalCount=" + itemCount);
             return;
@@ -235,9 +234,9 @@ public class WheelView extends View {
         mCenterY = getMeasuredHeight() / 2F;
 
         mDrawHeightHalf = (getMeasuredHeight() - getPaddingTop() - getPaddingBottom()) / 2F;
-        calculateBaseLine();
-
-        Log.i(TAG, "onMeasure.");
+        calculateCurrentBaseLine();
+        mSmoothScrollHelper.stop();
+        smoothToFinalPosition();
     }
 
     /** 测量宽度 */
@@ -298,9 +297,42 @@ public class WheelView extends View {
         return result;
     }
 
-    /** 计算所有文字初始化的 BaseLine */
-    private void calculateBaseLine() {
+    private int getItemCount() {
+        return mAdapter == null ? 0 : mAdapter.getCount();
+    }
+
+    /** 计算文字大小 */
+    private void calculateTextBounds() {
+        mMaxTextBounds.setEmpty();
+
         int itemCount = mAdapter != null ? mAdapter.getCount() : 0;
+        if (mTextBoundsArray.length != itemCount) {
+            mTextBoundsArray = new Rect[itemCount];
+        }
+
+        Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
+        float fontHeightF = Math.abs(fontMetrics.leading) + Math.abs(fontMetrics.ascent) + Math.abs(fontMetrics.descent);
+        int fontHeight = (int) Math.ceil(fontHeightF);
+
+        // 遍历所有文字，计算最大值
+        for (int i = 0; i < itemCount; i++) {
+            Rect textBounds = mTextBoundsArray[i] != null ? mTextBoundsArray[i] : new Rect();
+            String text = mAdapter.getText(i);
+
+            mTextPaint.getTextBounds(text, 0, text.length(), textBounds);
+            textBounds.top = 0;
+            textBounds.bottom = fontHeight;
+            if (textBounds.width() > mMaxTextBounds.width()) {
+                mMaxTextBounds.set(textBounds);
+            }
+
+            mTextBoundsArray[i] = textBounds;
+        }
+    }
+
+    /** 计算所有文字的 BaseLine */
+    private void calculateCurrentBaseLine() {
+        int itemCount = getItemCount();
         if (mBaseLineArray.length != itemCount) {
             mBaseLineArray = new float[itemCount];
         }
@@ -412,29 +444,6 @@ public class WheelView extends View {
         }
     }
 
-    /** 计算文字大小 */
-    private void calculateTextBounds() {
-        mMaxTextBounds.setEmpty();
-
-        int itemCount = mAdapter != null ? mAdapter.getCount() : 0;
-        if (mTextBoundsArray.length != itemCount) {
-            mTextBoundsArray = new Rect[itemCount];
-        }
-
-        // 遍历所有文字，计算最大值
-        for (int i = 0; i < itemCount; i++) {
-            Rect textBounds = mTextBoundsArray[i] != null ? mTextBoundsArray[i] : new Rect();
-            String text = mAdapter.getText(i);
-
-            mTextPaint.getTextBounds(text, 0, text.length(), textBounds);
-            if (textBounds.width() > mMaxTextBounds.width()) {
-                mMaxTextBounds.set(textBounds);
-            }
-
-            mTextBoundsArray[i] = textBounds;
-        }
-    }
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -512,11 +521,14 @@ public class WheelView extends View {
         }
 
         void smooth2FinalPosition() {
+            Log.d(TAG, "smooth2FinalPosition");
             if (mBaseLineArray.length <= mCurrentPosition) {
                 return;
             }
             float selectItemBaseLine = mBaseLineArray[mCurrentPosition];
+            Log.d(TAG, "mCurrentPosition : " + mCurrentPosition + " selectItemBaseLine=" + selectItemBaseLine);
             float distance = mCenterTextBaseLine - selectItemBaseLine;
+            Log.d(TAG, "mCurrentPosition : " + mCurrentPosition + " distance=" + distance);
             mAnimator.setInterpolator(mInterpolator);
             mAnimator.setDuration(200);
             mAnimator.setFloatValues(0, distance);
@@ -532,6 +544,7 @@ public class WheelView extends View {
 
         void stop() {
             if (mAnimator.isStarted() || mAnimator.isRunning()) {
+                mAnimator.removeAllUpdateListeners();
                 mAnimator.cancel();
             }
         }

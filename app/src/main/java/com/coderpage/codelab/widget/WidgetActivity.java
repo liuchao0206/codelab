@@ -2,7 +2,6 @@ package com.coderpage.codelab.widget;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
@@ -53,7 +52,7 @@ public class WidgetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_widget);
         ButterKnife.bind(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_widget);
+        Toolbar toolbar = findViewById(R.id.toolbar_widget);
         setSupportActionBar(toolbar);
 
         mRpb.setPercent(0.6f);
@@ -205,11 +204,9 @@ public class WidgetActivity extends AppCompatActivity {
         mWheelMonth.setAdapter(mMonthAdapter);
         mWheelDay.setAdapter(mDayAdapter);
 
-        new Handler().post(() -> {
-            mWheelYear.setSelectPosition(yearList.size() - 1);
-            mWheelMonth.setSelectPosition(currentMonth);
-            mWheelDay.setSelectPosition(currentDay - 1);
-        });
+        mWheelYear.setSelectPosition(yearList.size() - 1);
+        mWheelMonth.setSelectPosition(currentMonth);
+        mWheelDay.setSelectPosition(currentDay - 1);
     }
 
     /**
