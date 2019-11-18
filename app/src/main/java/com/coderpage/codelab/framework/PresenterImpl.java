@@ -1,7 +1,7 @@
 package com.coderpage.codelab.framework;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import static com.coderpage.codelab.utils.LogUtils.LOGI;
 import static com.coderpage.codelab.utils.LogUtils.makeLogTag;

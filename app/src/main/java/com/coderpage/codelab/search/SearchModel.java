@@ -2,7 +2,7 @@ package com.coderpage.codelab.search;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.coderpage.codelab.LabApplication;
 import com.coderpage.codelab.framework.Model;

@@ -2,8 +2,8 @@ package com.coderpage.codelab.widget;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -21,6 +21,7 @@ import com.coderpage.codelab.widget.floating.FloatingMenuLayout;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -151,7 +152,7 @@ public class WidgetActivity extends AppCompatActivity {
 
             @Override
             public String getText(int position) {
-                return String.valueOf(yearList.get(position));
+                return String.format(Locale.getDefault(), "%02d", yearList.get(position));
             }
         };
         mMonthAdapter = new BaseWheelAdapter() {
@@ -163,7 +164,7 @@ public class WidgetActivity extends AppCompatActivity {
 
             @Override
             public String getText(int position) {
-                return String.valueOf(monthList.get(position));
+                return String.format(Locale.getDefault(), "%02d", monthList.get(position));
             }
         };
         mDayAdapter = new BaseWheelAdapter() {
@@ -175,7 +176,7 @@ public class WidgetActivity extends AppCompatActivity {
 
             @Override
             public String getText(int position) {
-                return String.valueOf(dayList.get(position));
+                return String.format(Locale.getDefault(), "%02d", dayList.get(position));
             }
         };
 

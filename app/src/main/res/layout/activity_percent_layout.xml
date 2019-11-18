@@ -8,12 +8,12 @@
     android:orientation="vertical"
     tools:context="com.coderpage.codelab.percentlayout.PercentLayoutActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_percentlayout"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -23,10 +23,10 @@
             app:title="PercentLayout"
             app:titleTextColor="@color/colorAction"/>
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
 
-    <android.support.percent.PercentFrameLayout
+    <androidx.percentlayout.widget.PercentFrameLayout
         android:layout_width="match_parent"
         android:layout_height="200dp">
 
@@ -63,9 +63,9 @@
             app:layout_widthPercent="50%"/>
 
 
-    </android.support.percent.PercentFrameLayout>
+    </androidx.percentlayout.widget.PercentFrameLayout>
 
-    <android.support.percent.PercentRelativeLayout
+    <androidx.percentlayout.widget.PercentRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -143,6 +143,6 @@
             app:layout_heightPercent="75%"
             app:layout_widthPercent="35%"/>
 
-    </android.support.percent.PercentRelativeLayout>
+    </androidx.percentlayout.widget.PercentRelativeLayout>
 
 </LinearLayout>

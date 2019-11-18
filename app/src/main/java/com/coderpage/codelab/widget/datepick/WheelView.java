@@ -8,8 +8,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.support.annotation.Nullable;
-import android.support.v4.view.ViewCompat;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -22,6 +20,9 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.OverScroller;
+
+import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
 
 import com.coderpage.codelab.codelab.R;
 
@@ -620,6 +621,32 @@ public class WheelView extends View {
             int greenCurrent = (int) (greenStart + fraction * greenDiff);
 
             return Color.argb(alphaCurrent, redCurrent, greenCurrent, blueCurrent);
+        }
+    }
+
+
+    private Item[] mDrawItemArray = new Item[0];
+
+    private class Item {
+
+        boolean select;
+
+        int index;
+
+        float top;
+        float bottom;
+        float baseLine;
+        float textSize;
+
+        TextPaint textPaint;
+        Paint.FontMetrics fontMetrics;
+
+        void scrollBy(float dy) {
+
+        }
+
+        void draw(Canvas canvas) {
+
         }
     }
 }
