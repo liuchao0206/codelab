@@ -5,12 +5,6 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import androidx.annotation.Nullable;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,10 +22,17 @@ import com.coderpage.codelab.drawable.DrawableActivity;
 import com.coderpage.codelab.fingerprint.FingerPrintActivity;
 import com.coderpage.codelab.jni.JniActivity;
 import com.coderpage.codelab.percentlayout.PercentLayoutActivity;
+import com.coderpage.codelab.recycler.PinnedActivity;
 import com.coderpage.codelab.search.SearchActivity;
 import com.coderpage.codelab.service.ServiceActivity;
 import com.coderpage.codelab.widget.WidgetActivity;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -201,6 +202,9 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
                     case FINGERPRINT:
                         startActivity(new Intent(MainActivity.this, FingerPrintActivity.class));
                         break;
+                    case PINNED:
+                        startActivity(new Intent(MainActivity.this, PinnedActivity.class));
+                        break;
                     default:
                         break;
                 }
@@ -217,6 +221,7 @@ public class MainActivity extends AppCompatActivity implements Toolbar.OnMenuIte
         JNI("jni"),
         BLE("bluetooth"),
         FINGERPRINT("fingerprint"),
+        PINNED("pinnedView"),
         ;
 
         private String name;

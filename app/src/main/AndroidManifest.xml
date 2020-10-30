@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.coderpage.codelab.codelab"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.coderpage.codelab.codelab">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
     <application
         android:name="com.coderpage.codelab.LabApplication"
@@ -26,58 +26,52 @@
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.coderpage.codelab.widget.WidgetActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name="com.coderpage.codelab.percentlayout.PercentLayoutActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name="com.coderpage.codelab.search.SearchActivity"
             android:theme="@style/AppTheme.Search">
             <intent-filter>
-                <action android:name="android.intent.action.SEARCH"/>
+                <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
 
             <meta-data
                 android:name="android.app.searchable"
-                android:resource="@xml/searchable"/>
+                android:resource="@xml/searchable" />
         </activity>
 
         <service android:name="com.coderpage.codelab.service.DownloadService">
             <intent-filter>
-                <action android:name="com.coderpage.codelab.DOWNLOAD_SERVICES"/>
+                <action android:name="com.coderpage.codelab.DOWNLOAD_SERVICES" />
             </intent-filter>
         </service>
 
-        <service android:name="com.coderpage.codelab.widget.floating.FloatViewService"/>
+        <service android:name="com.coderpage.codelab.widget.floating.FloatViewService" />
 
         <activity
             android:name="com.coderpage.codelab.service.ServiceActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity android:name="com.coderpage.codelab.drawable.DrawableActivity">
-        </activity>
-        <activity android:name="com.coderpage.codelab.animation.AnimationActivity">
-        </activity>
-        <activity android:name="com.coderpage.codelab.jni.JniActivity">
-        </activity>
-        <activity android:name="com.coderpage.codelab.drawable.PhotoActivity">
-        </activity>
-        <activity android:name="com.coderpage.codelab.ble.BleActivity"/>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name="com.coderpage.codelab.drawable.DrawableActivity"></activity>
+        <activity android:name="com.coderpage.codelab.animation.AnimationActivity"></activity>
+        <activity android:name="com.coderpage.codelab.jni.JniActivity"></activity>
+        <activity android:name="com.coderpage.codelab.drawable.PhotoActivity"></activity>
+        <activity android:name="com.coderpage.codelab.ble.BleActivity" />
 
-        <activity android:name="com.coderpage.codelab.fingerprint.FingerPrintActivity"/>
+        <activity android:name="com.coderpage.codelab.fingerprint.FingerPrintActivity" />
+        <activity android:name="com.coderpage.codelab.recycler.PinnedActivity" />
 
         <meta-data
             android:name="CHANNEL"
-            android:value="${CHANNEL_VALUE}"/>
+            android:value="${CHANNEL_VALUE}" />
     </application>
 
 </manifest>

@@ -1,14 +1,21 @@
 package com.coderpage.codelab.drawable;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
+import android.renderscript.Allocation;
+import android.renderscript.Element;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicBlur;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import androidx.annotation.Nullable;
 
 import com.coderpage.codelab.BaseActivity;
 import com.coderpage.codelab.codelab.R;
@@ -26,6 +33,8 @@ public class DrawableActivity extends BaseActivity {
 
     @BindView(R.id.iv)
     ImageView mImageView;
+    @BindView(R.id.iv_cover)
+    ImageView mImageViewCover;
     @BindView(R.id.ivMatrix)
     ImageView mImageViewMatrix;
 
@@ -37,6 +46,8 @@ public class DrawableActivity extends BaseActivity {
         ButterKnife.bind(this);
         showBigSizePhoto();
         showMatrixPhoto();
+
+        generateBlurBitmap();
     }
 
     @Override
@@ -54,11 +65,11 @@ public class DrawableActivity extends BaseActivity {
     private void showBigSizePhoto() {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
-        BitmapFactory.decodeStream(getResources().openRawResource(R.raw.photo), null, options);
+        BitmapFactory.decodeStream(getResources().openRawResource(R.raw.photo2), null, options);
         options.inSampleSize = calculateInSampleSize(options, 100, 100);
         options.inJustDecodeBounds = false;
         Bitmap bitmap = BitmapFactory.decodeStream(
-                getResources().openRawResource(R.raw.photo), null, options);
+                getResources().openRawResource(R.raw.photo2), null, options);
         mImageView.setImageBitmap(bitmap);
     }
 
@@ -79,7 +90,6 @@ public class DrawableActivity extends BaseActivity {
     }
 
 
-    //    Canvas canvas;
     Matrix matrix;
     Bitmap bitmap;
 
@@ -114,6 +124,55 @@ public class DrawableActivity extends BaseActivity {
                 bitmap = bp;
                 mImageViewMatrix.setImageBitmap(bitmap);
                 break;
+
+            default:
+                break;
         }
+    }
+
+    public void generateBlurBitmap() {
+
+        int srcColor = Color.parseColor("#F2F2F6");
+        int mixColor = Color.parseColor("#F2F2F6");
+
+        srcColor = getResources().getColor(R.color.colorBlur);
+        mixColor = getResources().getColor(R.color.colorBlurMix);
+
+        int[] colorArray = new int[100 * 100];
+        for (int i = 0; i < colorArray.length; i++) {
+            colorArray[i] = i % 4 == 0 ? mixColor:srcColor;
+        }
+
+        Bitmap src = Bitmap.createBitmap(colorArray, 100,100, Bitmap.Config.ARGB_8888);
+        Bitmap blurBitmap = blur(this, src, 1, 10);
+        mImageViewCover.setImageBitmap(blurBitmap);
+    }
+
+    private Bitmap blur(Context context, Bitmap bitmap, float bitmapScale, int blurRadius) {
+        //先对图片进行压缩然后再blur 缩短时间
+        Bitmap inputBitmap = bitmap;
+        if (bitmapScale < 1) {
+            inputBitmap = Bitmap.createScaledBitmap(bitmap, Math.round(bitmap.getWidth() * bitmapScale),
+                    Math.round(bitmap.getHeight() * bitmapScale), false);
+        }
+        Bitmap outputBitmap;
+        //创建空的Bitmap用于输出
+        outputBitmap = Bitmap.createBitmap(inputBitmap);
+        //初始化Renderscript
+        RenderScript rs = RenderScript.create(context);
+        ScriptIntrinsicBlur theIntrinsic = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
+        //native层分配内存空间
+        Allocation tmpIn = Allocation.createFromBitmap(rs, inputBitmap);
+        Allocation tmpOut = Allocation.createFromBitmap(rs, outputBitmap);
+        //设置blur的半径然后进行blur
+        theIntrinsic.setRadius(blurRadius);
+        theIntrinsic.setInput(tmpIn);
+        theIntrinsic.forEach(tmpOut);
+        //拷贝blur后的数据到java缓冲区中
+        tmpOut.copyTo(outputBitmap);
+        //销毁Renderscript
+        rs.destroy();
+
+        return outputBitmap;
     }
 }

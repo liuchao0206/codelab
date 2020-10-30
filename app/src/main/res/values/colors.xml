@@ -29,4 +29,7 @@
     <color name="tagBgNormal">@color/colorPrimaryDark</color>
     <color name="tagBgPressed">@color/colorAction</color>
 
+    <color name="colorBlur">#efdddddd</color>
+    <color name="colorBlurMix">#aaaaaa</color>
+
 </resources>

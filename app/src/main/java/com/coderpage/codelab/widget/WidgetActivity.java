@@ -1,9 +1,11 @@
 package com.coderpage.codelab.widget;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import android.provider.Settings;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 import com.coderpage.codelab.codelab.R;
 import com.coderpage.codelab.widget.datepick.BaseWheelAdapter;
 import com.coderpage.codelab.widget.datepick.WheelView;
+import com.coderpage.codelab.widget.floating.FloatViewService;
 import com.coderpage.codelab.widget.floating.FloatingMenuLayout;
 
 import java.util.ArrayList;
@@ -23,6 +26,9 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -261,15 +267,41 @@ public class WidgetActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
-        // Intent intent = new Intent(this, FloatViewService.class);
-        // startService(intent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (Settings.canDrawOverlays(getApplicationContext())) {
+                Intent intent = new Intent(this, FloatViewService.class);
+                startService(intent);
+            } else {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+                intent.setData(Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, 100);
+            }
+        } else {
+            Intent intent = new Intent(this, FloatViewService.class);
+            startService(intent);
+        }
         super.onStart();
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (Settings.canDrawOverlays(getApplicationContext())) {
+                    Intent intent = new Intent(this, FloatViewService.class);
+                    startService(intent);
+                } else {
+                    Toast.makeText(getApplicationContext(), "拒绝悬浮窗权限", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    @Override
     protected void onStop() {
-        // Intent intent = new Intent(this, FloatViewService.class);
-        // stopService(intent);
+        Intent intent = new Intent(this, FloatViewService.class);
+        stopService(intent);
         super.onStop();
     }
 }

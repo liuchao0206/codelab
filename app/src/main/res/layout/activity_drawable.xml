@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,23 +14,42 @@
         android:background="?attr/colorPrimary"
         app:layout_scrollFlags="scroll|enterAlways"
         app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:titleTextColor="@color/colorAction"/>
+        app:titleTextColor="@color/colorAction" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="4dp"
-        android:background="@drawable/shadow_appbar"/>
+        android:background="@drawable/shadow_appbar" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="openPhotoActivity"
-        android:text="open photo activity"/>
+        android:text="open photo activity" />
 
-    <ImageView
-        android:id="@+id/iv"
-        android:layout_width="100dp"
-        android:layout_height="100dp"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_cover"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/iv"
+            app:layout_constraintEnd_toEndOf="@id/iv"
+            app:layout_constraintStart_toStartOf="@id/iv"
+            app:layout_constraintTop_toTopOf="@id/iv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/ivMatrix"
@@ -39,7 +57,7 @@
         android:layout_height="200dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/margin_normal"
-        android:scaleType="center"/>
+        android:scaleType="center" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,18 +68,18 @@
             android:id="@+id/btnScale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="缩放"/>
+            android:text="缩放" />
 
         <Button
             android:id="@+id/btnInverted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="倒影"/>
+            android:text="倒影" />
     </LinearLayout>
 
     <com.coderpage.codelab.drawable.DrawSth
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginTop="@dimen/margin_normal"/>
+        android:layout_marginTop="@dimen/margin_normal" />
 
 </LinearLayout>
